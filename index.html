@@ -15,7 +15,7 @@
     <!-- this one is for CDN scoring and routing -->
     <script src="https://cdn.jsdelivr.net/npm/@mlytics/p2sp-sdk@0.5.0-r2/bundle/driver.min.js"></script>
     <!-- this one is to play video using the HLS protocol -->
-    <script src="https://cdn.jsdelivr.net/npm/@mlytics/p2sp-sdk@0.5.0-r2/bundle/peripheral/videojs-hls.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@mlytics/p2sp-sdk@0.5.0-r2/bundle/peripheral/videojs-hls.min.js"></script>
 </head>
 
 <body>
@@ -43,8 +43,8 @@
     <input type="button" value="change 1" onclick="change_content('updated value 1', 'updated value2')"></input>
     <input type="button" value="request" onclick="request_text()"></input>
     <!-- if i press change 2 it will take value on the show() -->
-    <br/>
-    <br/>
+    <br />
+    <br />
     <div style="width: 400px">
         <video id="video" class="video-js vjs-theme-fantasy"></video>
     </div>
@@ -52,33 +52,33 @@
     <!-- below is the video script -->
     <script>
         // someday remove starting from here
-        const bunnyCDNs = [
+        const streamCDNs = [
             {
-                "id": "bunny1",
-                "host": "bunny1.pcdn.gordon.cf",
+                "id": "stream1",
+                "host": "stream1.pcdn.gordon.cf",
                 "enable": true,
                 "score": 1
             },
             {
-                "id": "bunny2",
-                "host": "bunny2.pcdn.gordon.cf",
-                "enable": true,
+                "id": "stream2",
+                "host": "stream2.pcdn.gordon.cf",
+                "enable": false,
                 "score": 0.7
             },
             {
-                "id": "bunny3",
-                "host": "bunny3.pcdn.gordon.cf",
+                "id": "stream3",
+                "host": "stream3.pcdn.gordon.cf",
                 "enable": true,
                 "score": 0.5
             },
             {
-                "id": "bunny4",
-                "host": "bunny4.pcdn.gordon.cf",
+                "id": "stream4",
+                "host": "stream4.pcdn.gordon.cf",
                 "enable": true,
-                "score": 1
+                "score": 0.2
             }
         ];
-        mlyp2sp.driver.configMCDN({ platforms: bunnyCDNs });
+        mlyp2sp.driver.configMCDN({ platforms: streamCDNs });
 
         const driver = mlyp2sp.driver.initialize({
             logger: {
@@ -112,8 +112,8 @@
                 }
             },
             sources: [{
-                src: 'https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8',
-                // src: 'https://origin.pcdn.gordon.cf/stream/2CyLFrOqgtQwai74OUNDqX6r0h9/index.m3u8'
+                // src: 'https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8',
+                src: 'https://origin.pcdn.gordon.cf/stream/2CyLFrOqgtQwai74OUNDqX6r0h9/index.m3u8',
                 type: 'application/vnd.apple.mpegurl'
             }],
             playbackRates: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.5, 2.0]
