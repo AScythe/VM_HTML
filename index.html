@@ -1,35 +1,122 @@
 <html>
-    <head>
-        <title>alvin first website</title>
-        <link rel="stylesheet" href="styles.css?v=9">
-	    <script src="wtf.js?v=17"></script>
-    </head>
-    <body>
-	    <h1>Hello universe!</h1>
-        <p>Per aspera ad astra</p>
-        <img class="rotating" src="https://memegenerator.net/img/instances/61713854.jpg" />
-        <!--img class="rotating" src"https://memegenerator.net/img/instances/61713854.jpg" /-->
-        <br/>
-        August is Time Travel Month!!!<br/>
-        <br/>
-        So grab your popcorn and cola, and watch the best time travel movies, tv series, and short films!
-        Here are my recommendations! Yeah!<br/>
-        <br/>
-        <input id="my-text" type="text" style="width: 500px;" />
-        <input type="button" value="show" onclick="show()"></input>
-        <br/>
-        Enter "movies", "series", or "shorts" on the field, and press the request button
-        <br/>
-        <br/>
-        <div id="div_1" style="color: red;">
-            <!-- <input value="put a value" /> -->
-            press to update div content
-        </div>
-        <br/>
-        <input type="button" value="change 1" onclick="change_content('updated value 1', 'updated value2')"></input>
-        <input type="button" value="request" onclick="request_text()"></input>
-        <!-- if i press change 2 it will take value on the show() -->
-        <br/>
-    </body>
-</html>
 
+<head>
+    <title>alvin first website</title>
+    <link rel="stylesheet" href="styles.css?v=9">
+    <script src="wtf.js?v=17"></script>
+    <!-- the following 3 links are for player -->
+    <link href="https://vjs.zencdn.net/7.18.0/video-js.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.18.0/video.min.js"></script>
+
+    <!-- this one is for MUX video event metrics  -->
+    <!-- <script src="https://src.litix.io/videojs/4/videojs-mux.js"></script> -->
+    <!-- this one is for CDN scoring and routing -->
+    <script src="https://cdn.jsdelivr.net/npm/@mlytics/p2sp-sdk@0.5.0-r2/bundle/driver.min.js"></script>
+    <!-- this one is to play video using the HLS protocol -->
+    <script src="https://cdn.jsdelivr.net/npm/@mlytics/p2sp-sdk@0.5.0-r2/bundle/peripheral/videojs-hls.min.js"></script> 
+</head>
+
+<body>
+    <h1>Hello universe!</h1>
+    <p>Per aspera ad astra</p>
+    <img class="rotating" src="https://memegenerator.net/img/instances/61713854.jpg" />
+    <!--img class="rotating" src"https://memegenerator.net/img/instances/61713854.jpg" /-->
+    <br />
+    August is Time Travel Month!!!<br />
+    <br />
+    So grab your popcorn and cola, and watch the best time travel movies, tv series, and short films!
+    Here are my recommendations! Yeah!<br />
+    <br />
+    <input id="my-text" type="text" style="width: 500px;" />
+    <input type="button" value="show" onclick="show()"></input>
+    <br />
+    Enter "movies", "series", or "shorts" on the field, and press the request button
+    <br />
+    <br />
+    <div id="div_1" style="color: red;">
+        <!-- <input value="put a value" /> -->
+        press to update div content
+    </div>
+    <br />
+    <input type="button" value="change 1" onclick="change_content('updated value 1', 'updated value2')"></input>
+    <input type="button" value="request" onclick="request_text()"></input>
+    <!-- if i press change 2 it will take value on the show() -->
+    <br/>
+    <br/>
+    <div style="width: 400px">
+        <video id="video" class="video-js vjs-theme-fantasy"></video>
+    </div>
+    <!-- below is the video script -->
+    <script>
+        // someday remove starting from here
+        const bunnyCDNs = [
+            {
+                "id": "bunny1",
+                "host": "bunny1.pcdn.gordon.cf",
+                "enable": true,
+                "score": 1
+            },
+            {
+                "id": "bunny2",
+                "host": "bunny2.pcdn.gordon.cf",
+                "enable": true,
+                "score": 0.7
+            },
+            {
+                "id": "bunny3",
+                "host": "bunny3.pcdn.gordon.cf",
+                "enable": true,
+                "score": 0.5
+            },
+            {
+                "id": "bunny4",
+                "host": "bunny4.pcdn.gordon.cf",
+                "enable": true,
+                "score": 1
+            }
+        ];
+        mlyp2sp.driver.configMCDN({ platforms: bunnyCDNs });
+
+        const driver = mlyp2sp.driver.initialize({
+            logger: {
+                level: 'DEBUG'
+            },
+            server: {
+                tracker: {
+                    fqdns: [
+                        'c.tracker.mlytics.us'
+                    ]
+                }
+            },
+            system: {
+                mode: 'mcdn_only'
+            },
+            download: {
+                httpInitialTimeout: 1
+            }
+        });
+        // someday remove until here
+
+        const player = window.videojs('video', {
+            autoplay: true,
+            controls: true,
+            preload: 'auto',
+            aspectRatio: '16:9',
+            html5: {
+                hlsConfig: {
+                    liveSyncDurationCount: Infinity,
+                    loader: driver.integrations.HLSLoader
+                }
+            },
+            sources: [{
+                src: 'https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8',
+                type: 'application/vnd.apple.mpegurl'
+            }],
+            playbackRates: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.5, 2.0]
+        });
+        player.muted(false);
+    </script>
+</body>
+
+</html>
