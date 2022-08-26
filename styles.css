@@ -3,7 +3,7 @@ color: #F90009
 }
 
 img {
-  width: 75%;
+  width: 25%;
   padding: 20px;
   border: 3px solid;
   background-color: #F90009
@@ -38,9 +38,9 @@ img {
   }
 }
 .rotating {
-  -webkit-animation: rotating 30s linear infinite;
-  -moz-animation: rotating 30s linear infinite;
-  -ms-animation: rotating 30s linear infinite;
-  -o-animation: rotating 30s linear infinite;
-  animation: rotating 30s linear infinite;
+  -webkit-animation: rotating 60s linear infinite;
+  -moz-animation: rotating 60s linear infinite;
+  -ms-animation: rotating 60s linear infinite;
+  -o-animation: rotating 60s linear infinite;
+  animation: rotating 60s linear infinite;
 }
