@@ -4,6 +4,7 @@
     <title>alvin first website</title>
     <link rel="stylesheet" href="styles.css?v=9">
     <script src="wtf.js?v=17"></script>
+
     <!-- the following 3 links are for player -->
     <link href="https://vjs.zencdn.net/7.18.0/video-js.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
@@ -47,6 +48,7 @@
     <div style="width: 400px">
         <video id="video" class="video-js vjs-theme-fantasy"></video>
     </div>
+
     <!-- below is the video script -->
     <script>
         // someday remove starting from here
@@ -111,6 +113,7 @@
             },
             sources: [{
                 src: 'https://wowza.peer5.com/live/smil:bbb_abr.smil/playlist.m3u8',
+                // src: 'https://origin.pcdn.gordon.cf/stream/2CyLFrOqgtQwai74OUNDqX6r0h9/index.m3u8'
                 type: 'application/vnd.apple.mpegurl'
             }],
             playbackRates: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.5, 2.0]
